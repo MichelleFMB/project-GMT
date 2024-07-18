@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, Button, Typography, MobileStepper } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
+import Carousel from 'react-material-ui-carousel';
 import { useNavigate } from 'react-router-dom';
-import SwipeableViews from 'react-swipeable-views';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const tutorialSteps = [
@@ -21,28 +21,14 @@ const tutorialSteps = [
 
 function CustomButton({ onClick }) {
   return (
-    <Box
-      onClick={onClick}
-      sx={{
-        mt: 2,
-        display: 'flex',
-        justifyContent: 'center', 
-        cursor: 'pointer'
-      }}
-    >
-      <Box
-        sx={{
-          width: 64,
-          height: 64,
-          borderRadius: '50%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          bgcolor: 'white',
-          boxShadow: '0 0 0 6px orange',
-          cursor: 'pointer'
-        }}
-      >
+    <Box onClick={onClick} sx={{
+      mt: 2, display: 'flex', justifyContent: 'center', cursor: 'pointer'
+    }}>
+      <Box sx={{
+        width: 64, height: 64, borderRadius: '50%', display: 'flex',
+        justifyContent: 'center', alignItems: 'center', bgcolor: 'white',
+        boxShadow: '0 0 0 6px orange', cursor: 'pointer'
+      }}>
         <ArrowForwardIosIcon sx={{ color: 'orange', fontSize: 30 }} />
       </Box>
     </Box>
@@ -55,24 +41,22 @@ function Home() {
   const maxSteps = tutorialSteps.length;
 
   const handleNext = () => {
-    if (activeStep < maxSteps - 1) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    } else {
-      navigate('/login');
-    }
+    setActiveStep(prevActiveStep => prevActiveStep + 1);
   };
 
-  const handleSkip = () => {
-    navigate('/login');
+  const handleBack = () => {
+    setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
 
   return (
     <Box sx={{ maxWidth: 400, flexGrow: 1, mx: 'auto' }}>
-      <SwipeableViews
-        axis={'x'}
+      <Carousel
+        autoPlay={false}
         index={activeStep}
-        onChangeIndex={(step) => setActiveStep(step)}
-        enableMouseEvents
+        onChange={(index, active) => setActiveStep(active)}
+        navButtonsAlwaysVisible={true}
+        NextIcon={<ArrowForwardIosIcon />}
+        PrevIcon={<ArrowForwardIosIcon />}
       >
         {tutorialSteps.map((step, index) => (
           <Box key={step.label} sx={{ p: 2, textAlign: 'center', height: 255 }}>
@@ -80,35 +64,10 @@ function Home() {
               {step.label}
             </Typography>
             <img src={step.imgPath} alt={step.label} style={{ width: '100%', height: 'auto' }} />
-            {index === maxSteps - 1 && (
-              <CustomButton onClick={handleNext} />
-            )}
           </Box>
         ))}
-      </SwipeableViews>
-      <MobileStepper
-        variant="dots"
-        steps={maxSteps}
-        position="static"
-        activeStep={activeStep}
-        backButton={
-          <Button size="small" onClick={handleSkip}>
-            Skip
-          </Button>
-        }
-        nextButton={
-          activeStep < maxSteps - 1 && (
-            <Button size="small" onClick={handleNext}>
-              Next
-            </Button>
-          )
-        }
-        sx={{
-          justifyContent: 'space-between',
-          px: 1,
-          bgcolor: 'background.paper'
-        }}
-      />
+      </Carousel>
+      {activeStep === maxSteps - 1 && <CustomButton onClick={() => navigate('/login')} />}
     </Box>
   );
 }
