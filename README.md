@@ -1,10 +1,8 @@
-# Getting Started with Create React App
+# Project GMT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was created for Get Me Therapy.
 
-## Available Scripts
-
-In the project directory, you can run:
+## Run
 
 ### `npm start`
 
