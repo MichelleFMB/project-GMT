@@ -2,7 +2,7 @@
 
 This project was created for Get Me Therapy.
 
-I created the app web with redux structure, authentication sections, tracking section and UX design section with mui material.
+I created the web app with redux structure, authentication sections, tracking section and UI design section with mui material.
 
 ## Run
 
