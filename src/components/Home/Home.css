@@ -1,0 +1,57 @@
+.MobileStepper .custom-dot {
+    background-color: #c0c0c0; 
+    width: 16px; 
+    height: 8px; 
+    border-radius: 4px;
+    margin: 0 4px;
+  }
+  
+  .MobileStepper .custom-dot-active {
+    background-color: #ffffff; 
+    width: 16px;  
+    height: 8px;
+    border-radius: 4px; 
+    margin: 0 4px;
+  }
+
+.custom-dot {
+    background-color: #c0c0c0 !important;
+    width: 16px !important;
+    height: 8px !important;
+    border-radius: 4px !important;
+    margin: 0 4px !important;
+  }
+  
+  .custom-dot-active {
+    background-color: #ffffff !important;
+    width: 16px !important;
+    height: 8px !important;
+    border-radius: 4px !important;
+    margin: 0 4px !important;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .transition-enter {
+    animation: fadeIn 0.5s ease-in forwards;
+  }
+  
+  .transition-exit {
+    animation: fadeOut 0.5s ease-out forwards;
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
