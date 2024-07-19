@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 const Quote = () => {
   const [quote, setQuote] = useState('');
@@ -17,7 +17,13 @@ const Quote = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return <Typography sx={{ mt: 4 }}>{quote}</Typography>;
+  return (
+    <Box sx={{ mt: 4, px: 2, textAlign: 'center', maxWidth: '80%' }}>
+      <Typography variant="body1" sx={{ fontStyle: 'italic', color: '#555' }}>
+        {quote}
+      </Typography>
+    </Box>
+  );
 };
 
 export default Quote;

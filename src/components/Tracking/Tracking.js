@@ -1,39 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AnalogClock from '../Clock/AnalogClock';
+import ShareButton from '../SharedButton/ShareButton';
+import ClockSlider from '../ClockSlider/ClockSlider';
 import Quote from '../Quote/Quote';
-import { Slider, Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 const Tracking = () => {
-  const [speed, setSpeed] = useState(1);
+  const getInitialSpeed = () => {
+    const params = new URLSearchParams(window.location.search);
+    const speedParam = params.get('speed');
+    return speedParam ? parseFloat(speedParam) : 1;
+  };
+
+  const [speed, setSpeed] = useState(getInitialSpeed);
 
   const handleSliderChange = (event, newValue) => {
     setSpeed(newValue);
   };
 
-  const handleShareButtonClick = () => {
-    const currentUrl = window.location.href;
-    const sharedUrl = `${currentUrl}?speed=${speed}`;
-    navigator.clipboard.writeText(sharedUrl);
-    alert(`URL copied to clipboard: ${sharedUrl}`);
-  };
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('speed')) {
+      setSpeed(parseFloat(params.get('speed')));
+    }
+  }, []);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, mt: 4 }}>
       <AnalogClock speed={speed} />
-      <Box sx={{ width: 300, mt: 2 }}>
-        <Typography>Adjust Clock Speed</Typography>
-        <Slider
-          value={speed}
-          min={0.1}
-          max={5}
-          step={0.1}
-          onChange={handleSliderChange}
-          valueLabelDisplay="auto"
-        />
-      </Box>
-      <Button variant="contained" onClick={handleShareButtonClick}>
-        Share
-      </Button>
+      <ClockSlider speed={speed} onSpeedChange={handleSliderChange} />
+      <ShareButton speed={speed} />
       <Quote />
     </Box>
   );
