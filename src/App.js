@@ -7,14 +7,16 @@ import Tracking from './components/Tracking/Tracking';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/tracking" element={<Tracking />} />
-      </Routes>
-    </Router>
+    <div className="App-container">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/tracking" element={<Tracking />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

@@ -1,3 +1,19 @@
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+body, .MuiTypography-root {
+  font-family: 'Inter', sans-serif !important;
+}
+
+
+.App-container {
+  max-width: 1800px; 
+  height: auto; 
+  margin: auto auto; 
+  width: 100%; 
+}
+
 .App {
   text-align: center;
 }
