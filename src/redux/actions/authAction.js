@@ -1,5 +1,5 @@
-import { auth, googleProvider} from '../../firebaseConfig';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '../../firebaseConfig';
+import { signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
 
 export const loginWithEmailAction = (email, password) => async (dispatch) => {
   try {
@@ -34,5 +34,14 @@ export const registerWithGoogleAction = () => async (dispatch) => {
     dispatch({ type: 'REGISTER_SUCCESS', payload: result.user });
   } catch (error) {
     dispatch({ type: 'REGISTER_ERROR', payload: error.message });
+  }
+};
+
+export const logoutAction = () => async (dispatch) => {
+  try {
+    await signOut(auth);
+    dispatch({ type: 'LOGOUT_SUCCESS' });
+  } catch (error) {
+    dispatch({ type: 'LOGOUT_ERROR', payload: error.message });
   }
 };
