@@ -73,15 +73,41 @@ function Home() {
           <Typography variant="h6" sx={{ fontSize: '1.3rem' }}>{tutorialSteps[activeStep].description}</Typography>
         </Box>
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        {activeStep === maxSteps - 1 ? (
-            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          {activeStep === maxSteps - 1 ? (
+            <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <MobileStepper
+                variant="dots"
+                steps={maxSteps}
+                position="static"
+                activeStep={activeStep}
+                sx={{
+                  flexGrow: 1,
+                  justifyContent: 'center',
+                  bgcolor: 'transparent',
+                  '.MuiMobileStepper-dot': {
+                    backgroundColor: '#c0c0c0',
+                    width: '16px',
+                    height: '8px',
+                    borderRadius: '4px',
+                    margin: '0 4px'
+                  },
+                  '.MuiMobileStepper-dotActive': {
+                    backgroundColor: '#ffffff',
+                    width: '16px',
+                    height: '8px',
+                    borderRadius: '4px',
+                    margin: '0 4px'
+                  }
+                }}
+              />
               <Box
                 sx={{
                   width: 100,
                   height: 100,
                   backgroundImage: `url(${process.env.PUBLIC_URL}/${tutorialSteps[activeStep].buttonImg})`,
                   backgroundSize: 'contain',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  mt: 2
                 }}
                 onClick={() => navigate('/login')}
               />
