@@ -14,5 +14,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser w
 
 ## App Deployed
 
-You can access to the website with this link [Project](https://github.com/MichelleFMB/project-GMT/tree/main).
+You can access to the website with this link [Project](https://project-gmt-mu.vercel.app/).
 It was deployed in Vercel.
