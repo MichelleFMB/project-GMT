@@ -21,6 +21,10 @@ const Login = () => {
   }, [user]);
 
   const handleLogin = () => {
+    if (!email || !password) {
+      alert('Please fill in all fields');
+      return;
+    }
     dispatch(loginWithEmailAction(email, password));
   };
 
@@ -70,6 +74,7 @@ const Login = () => {
         <Typography variant="body2" sx={{ mb: 4, fontSize: '0.875rem' }}>
           Please sign in to your account
         </Typography>
+        {error && <Typography color="error">{error}</Typography>}
         <TextField
           fullWidth
           type="email"
@@ -95,18 +100,21 @@ const Login = () => {
           variant="contained"
           onClick={handleLogin}
           sx={{
-            mb: 2,
+            mb: 4,
             textTransform: 'none',
             fontSize: '1rem',
             backgroundColor: '#FF9800',
             '&:hover': { backgroundColor: '#E68900' },
-            marginBottom: '1rem',
-            borderRadius: '20px', 
-            maxWidth: '300px'
+            borderRadius: '20px',
+            maxWidth: '300px',
+            margin: '0 auto'
           }}
         >
           Sign In
         </Button>
+        <Typography variant="body2" sx={{ mt: 3,mb: 3, fontSize: '0.875rem' }}>
+          Or sign in with
+        </Typography>
         <div
           onClick={handleGoogleLogin}
           style={{
@@ -131,7 +139,7 @@ const Login = () => {
           <img
             src={`${process.env.PUBLIC_URL}/assets/google_icon.png`}
             alt="Google Icon"
-            style={{ marginRight: '8px', display: 'flex', justifyContent: 'center'}}
+            style={{ display: 'flex', justifyContent: 'center'}}
           />
         </div>
         <Typography variant="body2" style={{ fontSize: '1rem' }}>
