@@ -64,7 +64,7 @@ const Login = () => {
         </Box>
       )}
       <Box sx={{ zIndex: 0, textAlign: 'center', mt: 8 }}>
-        <Typography variant="h4" component="h2" sx={{ mb: 2, fontSize: '2rem' }}>
+        <Typography variant="h4" component="h2" sx={{ mb: 2, fontSize: '2rem', fontWeight: 600 }}>
           Login to your account.
         </Typography>
         <Typography variant="body2" sx={{ mb: 4, fontSize: '0.875rem' }}>
@@ -94,30 +94,48 @@ const Login = () => {
           fullWidth
           variant="contained"
           onClick={handleLogin}
-          sx={{ mb: 2, backgroundColor: '#FF9800', '&:hover': { backgroundColor: '#E68900' } }}
+          sx={{
+            mb: 2,
+            textTransform: 'none',
+            fontSize: '1rem',
+            backgroundColor: '#FF9800',
+            '&:hover': { backgroundColor: '#E68900' },
+            marginBottom: '1rem',
+            borderRadius: '20px', 
+            maxWidth: '300px'
+          }}
         >
           Sign In
         </Button>
-        <Button
-          fullWidth
-          variant="outlined"
+        <div
           onClick={handleGoogleLogin}
-          sx={{
-            mb: 2,
+          style={{
             borderColor: '#FF9800',
             color: '#FF9800',
-            '&:hover': { borderColor: '#E68900', color: '#E68900' },
+            border: 'none',
+            borderRadius: '20px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            textTransform: 'none'
+            padding: '10px',
+            cursor: 'pointer',
+            marginBottom: '1rem',
+            maxWidth: '300px',
+            margin: '0 auto',
+            '&:hover': {
+              borderColor: '#E68900',
+              color: '#E68900'
+            },
           }}
         >
-          <img src={`${process.env.PUBLIC_URL}/assets/google_icon.png`} alt="Google Icon" style={{ marginRight: 8 }} />
-          Sign In with Google
-        </Button>
-        <Typography variant="body2">
-          Don't have an account? <a href="/register">Register</a>
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/google_icon.png`}
+            alt="Google Icon"
+            style={{ marginRight: '8px', display: 'flex', justifyContent: 'center'}}
+          />
+        </div>
+        <Typography variant="body2" style={{ fontSize: '1rem' }}>
+          Don't have an account? <a href="/register" style={{ textTransform: 'none', textDecoration: 'none', color: '#FE8C00', fontWeight: 600 }}>Register</a>
         </Typography>
       </Box>
     </Container>
