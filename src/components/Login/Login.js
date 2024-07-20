@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginWithEmailAction, loginWithGoogleAction } from '../../redux/actions/authAction';
 import { useNavigate } from 'react-router-dom';
 import LoginSuccessPopup from '../LoginPopUp/LoginSuccessPopup';
+import { Box, Button, TextField, Typography, Container, IconButton } from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google'; // Asegúrate de tener un icono de Google o usa tu propia imagen
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -36,10 +38,10 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <Container maxWidth="sm">
       {showPopup && (
-        <div
-          style={{
+        <Box
+          sx={{
             position: 'fixed',
             top: 0,
             left: 0,
@@ -56,28 +58,58 @@ const Login = () => {
             onClose={handleClosePopup}
             onGoToTracking={handleGoToTracking}
           />
-        </div>
+        </Box>
       )}
-      <div style={{ zIndex: 0 }}>
-        <h2>Login to your account.</h2>
-        {error && <p>Firebase: {error}</p>}
-        <input
+      <Box sx={{ zIndex: 0, textAlign: 'center', mt: 8 }}>
+        <Typography variant="h4" component="h2" sx={{ mb: 2, fontSize: '2rem' }}>
+          Login to your account.
+        </Typography>
+        <Typography variant="body2" sx={{ mb: 4, fontSize: '0.875rem' }}>
+          Please sign in to your account
+        </Typography>
+        {error && <Typography color="error">Firebase: {error}</Typography>}
+        <TextField
+          fullWidth
           type="email"
+          label="Email Address"
           placeholder="Enter Email"
+          variant="outlined"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          sx={{ mb: 2, fontSize: '0.875rem' }}
         />
-        <input
+        <TextField
+          fullWidth
           type="password"
+          label="Password"
           placeholder="Password"
+          variant="outlined"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          sx={{ mb: 2, fontSize: '0.875rem' }}
         />
-        <button onClick={handleLogin}>Sign In</button>
-        <button onClick={handleGoogleLogin}>Sign In with Google</button>
-        <p>Don't have an account? <a href="/register">Register</a></p>
-      </div>
-    </div>
+        <Button
+          fullWidth
+          variant="contained"
+          onClick={handleLogin}
+          sx={{ mb: 2, backgroundColor: '#FF9800', '&:hover': { backgroundColor: '#E68900' } }}
+        >
+          Sign In
+        </Button>
+        <Button
+          fullWidth
+          variant="outlined"
+          startIcon={<img src={`${process.env.PUBLIC_URL}/assets/google_icon.png`} alt="Google Icon" />}
+          onClick={handleGoogleLogin}
+          sx={{ mb: 2, borderColor: '#FF9800', color: '#FF9800', '&:hover': { borderColor: '#E68900', color: '#E68900' } }}
+        >
+          Sign In with Google
+        </Button>
+        <Typography variant="body2">
+          Don't have an account? <a href="/register">Register</a>
+        </Typography>
+      </Box>
+    </Container>
   );
 };
 
