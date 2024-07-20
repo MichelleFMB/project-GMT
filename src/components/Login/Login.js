@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginWithEmailAction, loginWithGoogleAction } from '../../redux/actions/authAction';
 import { useNavigate } from 'react-router-dom';
 import LoginSuccessPopup from '../LoginPopUp/LoginSuccessPopup';
-import { Box, Button, TextField, Typography, Container, IconButton } from '@mui/material';
-import GoogleIcon from '@mui/icons-material/Google'; // Asegúrate de tener un icono de Google o usa tu propia imagen
+import { Box, Button, TextField, Typography, Container } from '@mui/material';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -25,8 +24,12 @@ const Login = () => {
     dispatch(loginWithEmailAction(email, password));
   };
 
-  const handleGoogleLogin = () => {
-    dispatch(loginWithGoogleAction());
+  const handleGoogleLogin = async () => {
+    try {
+      await dispatch(loginWithGoogleAction());
+    } catch (error) {
+      console.error("Google login error: ", error);
+    }
   };
 
   const handleClosePopup = () => {
@@ -67,7 +70,6 @@ const Login = () => {
         <Typography variant="body2" sx={{ mb: 4, fontSize: '0.875rem' }}>
           Please sign in to your account
         </Typography>
-        {error && <Typography color="error">Firebase: {error}</Typography>}
         <TextField
           fullWidth
           type="email"
@@ -99,10 +101,19 @@ const Login = () => {
         <Button
           fullWidth
           variant="outlined"
-          startIcon={<img src={`${process.env.PUBLIC_URL}/assets/google_icon.png`} alt="Google Icon" />}
           onClick={handleGoogleLogin}
-          sx={{ mb: 2, borderColor: '#FF9800', color: '#FF9800', '&:hover': { borderColor: '#E68900', color: '#E68900' } }}
+          sx={{
+            mb: 2,
+            borderColor: '#FF9800',
+            color: '#FF9800',
+            '&:hover': { borderColor: '#E68900', color: '#E68900' },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textTransform: 'none'
+          }}
         >
+          <img src={`${process.env.PUBLIC_URL}/assets/google_icon.png`} alt="Google Icon" style={{ marginRight: 8 }} />
           Sign In with Google
         </Button>
         <Typography variant="body2">
