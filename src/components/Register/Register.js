@@ -27,15 +27,11 @@ const Register = () => {
   }, [user]);
 
   const handleRegister = () => {
-    if (!email || !userName || !password) {
-      setFormError('Please fill in all fields.');
+    if (!email || !userName || !password || !agree) {
+      setFormError('Please fill in all fields and agree to the terms.');
       return;
     }
-    if (!agree) {
-      setFormError('You must agree to the terms and conditions.');
-      return;
-    }
-    dispatch(registerWithEmailAction(email, userName, password, agree));
+    dispatch(registerWithEmailAction(email, password));
   };
 
   const handleGoogleRegister = () => {
@@ -167,7 +163,7 @@ const Register = () => {
         >
           Register
         </Button>
-        <Typography variant="body2" sx={{ mt: 3,mb: 2, fontSize: '0.875rem' }}>
+        <Typography variant="body2" sx={{ mb: 3, fontSize: '0.875rem', mt: 2 }}>
           Or sign in with
         </Typography>
         <div
